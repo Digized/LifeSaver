@@ -1,0 +1,44 @@
+<nav class="navbar is-light" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="#">
+            <p class="title is-3">
+                WaitLess
+            </p>
+        </a>
+        <div class="navbar-burger burger" data-target="phoneNavbar" id="nav-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <div class="navbar-menu" id="phoneNavbar">
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <p class="control">
+                <a href="#" class="button is-link">
+                    <span class="icon">
+                        <i class="far fa-edit"></i>
+                    </span>
+                    <span>
+                        Edit
+                    </span>
+                </a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        document.getElementById("nav-toggle").addEventListener ("click", toggleNav);
+        function toggleNav() {
+                var nav = document.getElementById("phoneNavbar");
+                var className = nav.getAttribute("class");
+                console.log(className);
+                if(className == "navbar-menu") {
+                    nav.className = "navbar-menu is-active";
+                } else {
+                    nav.className = "navbar-menu";
+                }
+        }
+    </script>
+</nav>
