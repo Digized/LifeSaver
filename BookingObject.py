@@ -2,7 +2,7 @@ class BookingObject:
     def __init__(self,patient,shortDescription,emergencyLevel):
         self.patient=patient
         self.shortDescription=shortDescription
-        self.queueNumber
+        self.queueNumber=""
         self.emergencyLevel=emergencyLevel
         self.patientLocation=patient.get_location()
         self.notes=""

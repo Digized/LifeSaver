@@ -34,7 +34,7 @@ class Patient:
         lat = j['latitude']
         lon = j['longitude']
         city = j['city']
-        return "latitude: "+str(lat)+ " longitude: "+ str(city)
+        return "latitude: "+str(lat)+ " longitude: "+ str(lon)
 
     def set_firstName(self, newfirstname):
         self.firstName = newfirstname
