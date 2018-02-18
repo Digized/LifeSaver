@@ -11,29 +11,96 @@ class BookingObject:
         self.bookingState='waiting'
         self.startTime=datetime.datetime.now()
         self.endTime=datetime.datetime.now()
-
-        self.create_database()
-    def get_end_time(self):
-        self.endTime= datetime.datetime.now()
-        return self.endTime
-    def set_end_time(self, time):
+        # self.create_database()
+    @staticmethod
+    def get_end_time(healthCardNum):
+        client=MongoClient()
+        db=client.booking_object_database
+        collection=db.booking_object_collection
+        bookings=db.bookings
+        res=bookings.find_one({'healthCardId':healthCardNum},{'endTime':1,'_id':0})
+        if(res==None):
+            return -1
+        return res['endTime']
+        # return self.endTime
+    @staticmethod
+    def set_end_time(healthCardNum,time):
+        client=MongoClient()
+        db=client.booking_object_database
+        collection=db.booking_object_collection
+        bookings=db.bookings
+        res=bookings.update_one({'healthCardId':healthCardNum},{'$set':{'endTime':time}})
         endTime=time
-    def get_patient(self):
-        return self.patient
-    def get_start_time(self):
-        return self.startTime
-    def get_short_description(self):
-        return self.shortDescription
-    def get_queue_number(self):
-        return self.queueNumber
-    def get_emergency_level(self):
-        return self.emergencyLevel
-    def get_booking_state(self):
-        return bookingState
-    def get_patient_location(self):
-        return self.patientLocation
-    def get_notes(self):
-        return self.notes
+    @staticmethod
+    def get_start_time(healthCardNum):
+        client=MongoClient()
+        db=client.booking_object_database
+        collection=db.booking_object_collection
+        bookings=db.bookings
+        res=bookings.find_one({'healthCardId':healthCardNum},{'startTime':1,'_id':0})
+        if(res==None):
+            return -1
+        return res['startTime']
+        @staticmethod
+    def get_short_description(healthCardNum):
+        client=MongoClient()
+        db=client.booking_object_database
+        collection=db.booking_object_collection
+        bookings=db.bookings
+        res=bookings.find_one({'healthCardId':healthCardNum},{'description':1,'_id':0})
+        if(res==None):
+            return -1
+        return res['description']
+    @staticmethod
+    def get_queue_number(healthCardNum):
+        client=MongoClient()
+        db=client.booking_object_database
+        collection=db.booking_object_collection
+        bookings=db.bookings
+        res=bookings.find_one({'healthCardId':healthCardNum},{'queueNumber':1,'_id':0})
+        if(res==None):
+            return -1
+        return res['queueNumber']
+    @staticmethod
+    def get_emergency_level(healthCardNum):
+        client=MongoClient()
+        db=client.booking_object_database
+        collection=db.booking_object_collection
+        bookings=db.bookings
+        res=bookings.find_one({'healthCardId':healthCardNum},{'emergencyLevel':1,'_id':0})
+        if(res==None):
+            return -1
+        return res['emergencyLevel']
+    @staticmethod
+    def get_booking_state(healthCardNum):
+        client=MongoClient()
+        db=client.booking_object_database
+        collection=db.booking_object_collection
+        bookings=db.bookings
+        res=bookings.find_one({'healthCardId':healthCardNum},{'bookingState':1,'_id':0})
+        if(res==None):
+            return -1
+        return res['bookingState']
+    @staticmethod
+    def get_patient_location(healthCardNum):
+        client=MongoClient()
+        db=client.booking_object_database
+        collection=db.booking_object_collection
+        bookings=db.bookings
+        res=bookings.find_one({'healthCardId':healthCardNum},{'patientLocation':1,'_id':0})
+        if(res==None):
+            return -1
+        return res['patientLocation']
+    @staticmethod
+    def get_notes(healthCardNum):
+        client=MongoClient()
+        db=client.booking_object_database
+        collection=db.booking_object_collection
+        bookings=db.bookings
+        res=bookings.find_one({'healthCardId':healthCardNum},{'notes':1,'_id':0})
+        if(res==None):
+            return -1
+        return res['notes']
     def set_queue_number(self,queueNumber):
         self.queueNumber=queueNumber
     def set_notes(self,notes):
@@ -46,14 +113,7 @@ class BookingObject:
         collection=db.booking_object_collection
         bookings=db.bookings
         booking_data={
-            'name': self.patient.firstname,
-            'healthCardId': self.patient.healthCardId,
-            'expiryDate':self.patient.expiryDate,
-            'dateOfBirth':self.patient.dateOfBirth,
-            'sex':self.patient.sex,
-            'phoneNumber':self.patient.phoneNumber,
-            'primaryAddress':self.patient.primaryAddress,
-            'healthCondition':self.patient.healthCondition,
+            'healthCardId':self.patient.healthCardId,
             'description':self.shortDescription,
             'queueNumber':self.queueNumber,
             'emergencyLevel':self.emergencyLevel,
@@ -72,6 +132,7 @@ class BookingObject:
         bookings=db.bookings
         for booking in bookings.find():
             print(booking)
+        return bookings
     def updatePatientName(self,healthCardNum,newName):
         client=MongoClient()
         db=client.booking_object_database
