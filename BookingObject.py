@@ -11,50 +11,66 @@ class BookingObject:
         self.bookingState='waiting'
         self.startTime=datetime.datetime.now()
         self.endTime=datetime.datetime.now()
+        self.create_booking()
 
-        self.create_database()
     def get_end_time(self):
-        self.endTime= datetime.datetime.now()
         return self.endTime
-    def set_end_time(self, time):
-        endTime=time
-    def get_patient(self):
-        return self.patient
+        # return self.endTime
+    def set_end_time(self,time):
+        self.endTime=time
+
+    def set_start_time(self,time):
+        self.startTime=time
     def get_start_time(self):
         return self.startTime
+    def getPatient(self):
+        return self.patient
     def get_short_description(self):
         return self.shortDescription
     def get_queue_number(self):
         return self.queueNumber
-    def get_emergency_level(self):
-        return self.emergencyLevel
-    def get_booking_state(self):
-        return bookingState
-    def get_patient_location(self):
+    def get_emergency_level(self,healthCardNum):
+        return seld.emergancylevel
+    def get_booking_state(self,healthCardNum):
+        return self.bookingState
+    def get_patient_location(self,healthCardNum):
         return self.patientLocation
-    def get_notes(self):
+    def get_notes(self,healthCardNum):
         return self.notes
-    def set_queue_number(self,queueNumber):
-        self.queueNumber=queueNumber
-    def set_notes(self,notes):
-        self.notes=notes
-    def set_booking_state(self,state):
-        self.bookingState=state
-
-    def create_database(self):
-        client=MongoClient()
-        db=client.booking_object_database
-        collection=db.booking_object_collection
-        bookings=db.bookings
-        booking_data={
-            'name': self.patient.firstname,
-            'healthCardId': self.patient.healthCardId,
-            'expiryDate':self.patient.expiryDate,
-            'dateOfBirth':self.patient.dateOfBirth,
-            'sex':self.patient.sex,
-            'phoneNumber':self.patient.phoneNumber,
-            'primaryAddress':self.patient.primaryAddress,
-            'healthCondition':self.patient.healthCondition,
+    def set_queue_number(self,newQueueNumber):
+        self.queueNumber=newQueueNumber
+    def set_notes(self,newNotes):
+        self.notes=newQueueNumber
+    def set_booking_state(self,newState):
+        self.bookingState=newState
+    def set_emergency_level(self,newEmergencyLevel):
+        self.emergancylevel=newEmergencyLevel
+    def set_description(self,newDescription):
+        self.shortDescription=newDescription
+    def set_patient_location(self,newLocation):
+        self.patientLocation=newLocation
+    def set_patient(self,newPatient):
+        self.patient=newPatient
+    # def create_booking(self):
+    #     client=MongoClient()
+    #     db=client.booking_object_database
+    #     collection=db.booking_object_collection
+    #     bookings=db.bookings
+    #     booking_data={
+    #         'healthCardId':self.patient.healthCardId,
+    #         'description':self.shortDescription,
+    #         'queueNumber':self.queueNumber,
+    #         'emergencyLevel':self.emergencyLevel,
+    #         'patientLocation': self.patientLocation,
+    #         'notes':self.notes,
+    #         'bookingState':self.bookingState,
+    #         'startTime':self.startTime,
+    #         'endTime':self.endTime
+    #     }
+    #     result=bookings.insert_one(booking_data)
+    def toJSON(self):
+        val = {
+            'healthCardId':self.patient.healthCardId,
             'description':self.shortDescription,
             'queueNumber':self.queueNumber,
             'emergencyLevel':self.emergencyLevel,
@@ -64,190 +80,40 @@ class BookingObject:
             'startTime':self.startTime,
             'endTime':self.endTime
         }
-        result=bookings.insert_one(booking_data)
-        print('One post: {0}'.format(result.inserted_id))
-    def getDatabase(self):
+        return val
+    def updatetoJSON(self,id):
+        val={'healthCardId':self.patient.healthCardId},
+        {
+            '$set':{
+                'description':self.shortDescription,
+                'queueNumber':self.queueNumber,
+                'emergencyLevel':self.emergencyLevel,
+                'patientLocation': self.patientLocation,
+                'notes':self.notes,
+                'bookingState':self.bookingState,
+                'startTime':self.startTime,
+                'endTime':self.endTime
+            }
+        }
+        return val
+    @staticmethod
+    def create(patient):
         client=MongoClient()
         db=client.booking_object_database
-        collection=db.booking_object_collection
         bookings=db.bookings
-        for booking in bookings.find():
-            print(booking)
-    def updatePatientName(self,healthCardNum,newName):
+        result=bookings.insert(booking.toJSON())
+        return patient.get_healthCardId();
+    @staticmethod
+    def getBookingByHC(healthcardNum):
         client=MongoClient()
         db=client.booking_object_database
-        collection=db.booking_object_collection
-        result=db.bookings.update(
-        {'healthCardId':healthCardNum},
-        {
-            '$set': {
-                'name':newName
-            }
-        }
-        )
-        # //print(result.matched_count)
-    def updatePatientDOB(self,healthCardNum,newDOB):
+        bookings=db.bookings
+        result=bookings.find({'healthCardId':healthCardNum})
+        return result
+    @staticmethod
+    def updateBooking(id,booking):
         client=MongoClient()
         db=client.booking_object_database
-        collection=db.booking_object_collection
-        result=db.bookings.update(
-        {'healthCardId':healthCardNum},
-        {
-            '$set': {
-                'dateOfBirth':newDOB
-            }
-        }
-        )
-    def updatePatientPhoneNumber(self,healthCardNum,newPhoneNum):
-        client=MongoClient()
-        db=client.booking_object_database
-        collection=db.booking_object_collection
-        result=db.bookings.update(
-        {'healthCardId':healthCardNum},
-        {
-            '$set': {
-                'phoneNumber':newPhoneNum
-            }
-        }
-        )
-    def updatePatientAddress(self,healthCardNum,newAddress):
-        client=MongoClient()
-        db=client.booking_object_database
-        collection=db.booking_object_collection
-        result=db.bookings.update(
-        {'healthCardId':healthCardNum},
-        {
-            '$set': {
-                'name':newName
-            }
-        }
-        )
-    def updatePatientHealthCondition(self,healthCardNum,newhealthCondition):
-        client=MongoClient()
-        db=client.booking_object_database
-        collection=db.booking_object_collection
-        result=db.bookings.update(
-        {'healthCardId':healthCardNum},
-        {
-            '$set': {
-                'healthCondition':newhealthCondition
-            }
-        }
-        )
-    def updateDescription(self,healthCardNum,newDescription):
-        client=MongoClient()
-        db=client.booking_object_database
-        collection=db.booking_object_collection
-        result=db.bookings.update(
-        {'healthCardId':healthCardNum},
-        {
-            '$set': {
-                'description':newDescription
-            }
-        }
-        )
-    def updatequeueNum(self,healthCardNum,newQueueNum):
-        client=MongoClient()
-        db=client.booking_object_database
-        collection=db.booking_object_collection
-        result=db.bookings.update(
-        {'healthCardId':healthCardNum},
-        {
-            '$set': {
-                'queueNumber':newQueueNum
-            }
-        }
-        )
-    def updateEmergencyLevel(self,healthCardNum,newEmergencyLevel):
-        client=MongoClient()
-        db=client.booking_object_database
-        collection=db.booking_object_collection
-        result=db.bookings.update(
-        {'healthCardId':healthCardNum},
-        {
-            '$set': {
-                'emergencyLevel':newEmergencyLevel
-            }
-        }
-        )
-    def updatePatientLocation(self,healthCardNum,newLocation):
-        client=MongoClient()
-        db=client.booking_object_database
-        collection=db.booking_object_collection
-        result=db.bookings.update(
-        {'healthCardId':healthCardNum},
-        {
-            '$set': {
-                'patientLocation':newLocation
-            }
-        }
-        )
-    def updateNotes(self,healthCardNum,newNotes):
-        client=MongoClient()
-        db=client.booking_object_database
-        collection=db.booking_object_collection
-        result=db.bookings.update(
-        {'healthCardId':healthCardNum},
-        {
-            '$set': {
-                'notes':newNotes
-            }
-        }
-        )
-    def updateBookingState(self,healthCardNum,newBookingState):
-        client=MongoClient()
-        db=client.booking_object_database
-        collection=db.booking_object_collection
-        result=db.bookings.update(
-        {'healthCardId':healthCardNum},
-        {
-            '$set': {
-                'bookingState':newBookingState
-            }
-        }
-        )
-    def updateEndTime(self,healthCardNum,newEndTime):
-        client=MongoClient()
-        db=client.booking_object_database
-        collection=db.booking_object_collection
-        result=db.bookings.update(
-        {'healthCardId':healthCardNum},
-        {
-            '$set': {
-                'endTime':newEndTime
-            }
-        }
-        )
-    def updatePatientSex(self,healthCardNum,newSex):
-        client=MongoClient()
-        db=client.booking_object_database
-        collection=db.booking_object_collection
-        result=db.bookings.update(
-        {'healthCardId':healthCardNum},
-        {
-            '$set': {
-                'sex':newSex
-            }
-        }
-        )
-    def deleteDocument(self,healthCardNum):
-        client=MongoClient()
-        db=client.booking_object_database
-        collection=db.booking_object_collection
-        result=db.bookings.delete_many({'healthCardId':healthCardNum})
-    def deleteDatabases(self):
-         client=MongoClient()
-         db=client.booking_object_database
-         collection=db.booking_object_collection
-         db.bookings.drop()
-    #     for book in booking_object.objects:
-    #         book.delete()
-    # def editBookingInfoDatabase(self,healthCard,descript,queueNum,patientLoc,emergencyLvl,notes,booking_state):
-    #     for info in booking_object.objects(info.patient_information.health_card_id=healthCard):
-    #             info.update_one(set__queue_number=int(queueNum))
-    #             info.update_one(set__location=patientLoc)
-    #             info.update_one(set__emergency_level=int(emergencyLvl))
-    #             info.update_one(set__notes=str(notes))
-    #             info.update_one(set__booking_state=str(booking_state))
-    #             info.update_one(set__description=str(descript))
-    #             print('success')
+        bookings=db.bookings
+        result=bookings.update(booking.updatetoJSON(id))
+        return booking.getPatient().get_healthCardId();
