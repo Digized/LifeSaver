@@ -53,7 +53,7 @@ class Patient:
         self.primaryAddress=newAddress
     def set_healthCondition(self, newhealthCondition):
         self.healthCondition = newhealthCondition
-    
+
     def toJSON(self):
         val = {
             "healthCardId": self.healthCardId,
@@ -63,10 +63,23 @@ class Patient:
             "sex":self.sex,
             "phoneNumber":self.phoneNumber,
             "primaryAddress":self.primaryAddress,
-            "healthCondition":self.healthCondition        
+            "healthCondition":self.healthCondition
         }
         return val
-
+    def updatetoJSON(self,id):
+        val={'healthCardId':self.healthCardId},
+        {
+            '$set':{
+                'expiryDate':self.expiryDate,
+                'name':self.name,
+                'dateOfBirth':self.dateOfBirth,
+                'sex':self.sex,
+                'phoneNumber':self.phoneNumber,
+                'primaryAddress':self.primaryAddress,
+                'healthCondition':self.healthCondition
+            }
+        }
+        return val
     @staticmethod
     def find_by_HC(healthCardNum):
         client=MongoClient()
@@ -74,7 +87,7 @@ class Patient:
         collection=db.patients
         result=collection.find({'healthCardId':healthCardNum})
         print(result);
-    
+
     @staticmethod
     def create(patient):
         client=MongoClient()
@@ -82,6 +95,12 @@ class Patient:
         collection=db.patients
         result=collection.insert(patient.toJSON())
         return patient.get_healthCardId();
-
+    @staticmethod
+    def update(id,patient):
+        client=MongoClient()
+        db=client.booking_object_database
+        collection=db.patients
+        result=collection.update(patient.updatetoJSON(id))
+        return patient.get_healthCardId();
 # a = Patient('123444444','232323','Dan Siddiqui','dob','sex','32323232','45mann','helth')
 # print (a.get_current_location())
