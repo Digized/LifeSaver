@@ -7,6 +7,8 @@ from flask import Flask, render_template, jsonify, request, redirect
 from werkzeug.utils import secure_filename
 from google.cloud import vision
 from google.cloud.vision import types
+from Hospital import Hospital
+import operator
 
 # data = []
 # data.append(Patient('123444444','Dan', 'siddiqui','dob','sex','32323232','45mann','helth'))
@@ -39,6 +41,15 @@ ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+hospital1 = Hospital("Ottawa Hostpital", "123 Hospital.Rd")
+
+hospital2 = hospital2("City Clinic,", "66 Town.st")
+
+listOfHospital = [hospital1, hospital2]
+def lbh(listOfHospital):
+    listOfHospital.sort(key=operator.attrgetter("numberofPatients"), reverse=False)
+    return list[0]
 
 def allowed_file(filename):
     return '.' in filename and \
