@@ -40,6 +40,7 @@ class BookingObject:
         self.notes=notes
     def set_booking_state(self,state):
         self.bookingState=state
+
     def create_database(self):
         client=MongoClient()
         db=client.booking_object_database
