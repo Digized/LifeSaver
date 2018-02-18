@@ -7,6 +7,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
         crossorigin="anonymous"></script> {% if name %}
     <title>Hello {{ name }}!</title>
+
     {% else %}
     <title>Hello, World!</title>
     {% endif %}
@@ -30,7 +31,7 @@
                 </div> -->
                 <div class="media-content">
                     <div class="content">
-                        <h1 >{{patient.get_firstName()}}</h1>
+                        <h1 >{{patient.get_name()}}</h1>
                     </div>
                     <div class="level">
                         <div class="level-left"></div>
@@ -51,7 +52,7 @@
             </div>
         </a>
     </div>
-    <!-- {{patient.get_firstName()}}</li> -->
+    <!-- {{patient.get_name()}}</li> -->
     {% endfor %}
     <!-- </div> -->
 
@@ -63,7 +64,8 @@
             </div>
         </div>
         <div class="column">
-            <h1 class="title">{{data[0].get_firstName()}}</h1>
+            <h1 class="title">{{data[0].get_name()}}</h1>
+            <h1>{{data[0].get_healthCardId()}}</h1>
         </div>
     </div>
 </body>

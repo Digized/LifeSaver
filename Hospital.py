@@ -7,11 +7,11 @@ patientdict = []
 
  def add_Booking(BookingObject):
      patientdict.append(BookingObject)
-     patientdict.sort()
+     patientdict.sort(key=operator.attrgetter("emergancylevel"), reverse=False)
 
 def delete_Booking(BookingObject):
-        patientdict.remove(BookingObject)
-        patientdict.sort()
+    patientdict.remove(BookingObject)
+    patientdict.sort(key=operator.attrgetter("emergancylevel"), reverse=False)
 def sort():
     patientdict.sort(key=operator.attrgetter("emergancylevel"), reverse=False)
 def get_list():

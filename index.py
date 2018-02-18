@@ -3,12 +3,37 @@ import os
 from Patient import Patient
 from BookingObject import BookingObject
 from io import open
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, redirect
 from werkzeug.utils import secure_filename
 from google.cloud import vision
 from google.cloud.vision import types
 
-
+# data = []
+# data.append(Patient('123444444','Dan', 'siddiqui','dob','sex','32323232','45mann','helth'))
+# data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
+# data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
+# data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
+# data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
+# data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
+#     data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
+#     data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
+#     data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
+#     data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
+#     data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
+#     data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
+#     data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
+#     data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
+#     data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
+#     data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
+#     data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
+#     data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
+#     data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
+#     data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
+#     data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
+#     data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
+#     data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
+#     data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
+# data.append(Patient('12344asdsa4444','Dasdbaskhan', 'siddiqui','dob','sex','32asdas323232','45mann','helth'))
 UPLOAD_FOLDER = os.path.dirname(__file__)+'/tmpfiles/'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
@@ -23,45 +48,32 @@ def allowed_file(filename):
 def hello():
     return "Hello World!"
 
-@app.route("/dashboard")
-def dashboard():
-    data = []
-    data.append(Patient('123444444','Dan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-    data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-    data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-    data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-    data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-    data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-    data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-    data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-    data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-    data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-    data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-    data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-    data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-    data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-    data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-    data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-    data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-    data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-    data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-    data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-    data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-    data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-    data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-    data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-    data.append(Patient('12344asdsa4444','Dasdbaskhan', 'siddiqui','dob','sex','32asdas323232','45mann','helth'))
+@app.route("/clinic/<id>/")
+def dashboard(id):
+    Patient.get
     return render_template("dashboard.html", data=data)
 
-@app.route("/phone")
-def phone():
-    return render_template("app.html", name="Zuraiz")
+@app.route("/user/<id>")
+def getuser(id):
+    patient = Patient.find_by_HC(id)
+    return render_template("user.html", patient=patient)
 
-@app.route("/user")
-def user():
-    return render_template("edituser.html", name="Zuraiz")
+@app.route("/user/", methods=["POST"])
+@app.route("/user/create",methods = ["GET"])
+@app.route("/user/<id>/edit", methods=["POST","GET"])
+def modifyuser(id=None):
+    if(request.method=="POST"):
+        if(id):
+            Patient.update(id, create_patient(request.form))
+        else:
+            id = Patient.create(create_patient(request.form))
+        newUrl = "/user/" + id
+        return redirect(newUrl)
+    if(request.method=="GET"):
+        patient = Patient.find_by_HC(id)
+        return render_template("edituser.html", patient=patient)
 
-  @app.route('/upload', methods=['GET', 'POST'])
+@app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
         # check if the post request has the file part
@@ -84,24 +96,15 @@ def recognize(file):
     labels = response.label_annotations
     return labels
 
-
-@app.route('/api/user',methods = ["POST"])
-def show_user_profile():
-    print ('hello')
-    return None
-
-@app.route('/api/user',methods = ["POST"])
-def create_patient():
-    name = request.form['name']
-    healthCardId = request.form['healthCardId']
-    dateOfBirth = request.form['dateOfBirth']
-    sex = request.form['sex']
-    expiryDate = request.form['expiryDate']
-    primaryAddress = request.form['primaryAddress']
-    phoneNumber = request.form['phoneNumber']
-    healthCondition = request.form['healthCondition']
-
-
+def create_patient(form):
+    name = form['name']
+    healthCardId = form['healthCardId']
+    dateOfBirth = form['dateOfBirth']
+    sex = form['sex']
+    expiryDate = form['expiryDate']
+    primaryAddress = form['primaryAddress']
+    phoneNumber = form['phoneNumber']
+    healthCondition = form['healthCondition']
     patientcreated = Patient(healthCardId, expiryDate, name, dateOfBirth, sex, phoneNumber, primaryAddress, healthCondition)
     return patientcreated
 
