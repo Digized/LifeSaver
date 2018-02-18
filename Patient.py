@@ -24,6 +24,8 @@ class Patient:
         return self.dateOfBirth
     def get_sex(self):
         return self.sex
+    def get_health_condition(self):
+        return self.healthCondition
     def get_phoneNumber(self):
         return self.phoneNumber
     def get_primaryAddress(self):

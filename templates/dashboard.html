@@ -23,7 +23,7 @@
     {% for patient in list %}
     <div class="box is-selected">
         <a href="#">
-            <div class="media" >
+            <div class="media">
                 <!-- <div class="media-left">
                     <div class="content">
                         <p class="subtitle is-4">1</p>
@@ -31,7 +31,7 @@
                 </div> -->
                 <div class="media-content">
                     <div class="content">
-                        <h1 >{{patient.get_name()}}</h1>
+                        <h1>{{patient.get_name()}}</h1>
                     </div>
                     <div class="level">
                         <div class="level-left"></div>
@@ -56,7 +56,7 @@
     {% endfor %}
     <!-- </div> -->
 
-    {% endmacro %} {% include "header.html" %}
+    {% endmacro %} {% with val="Login" %} {% include "header.html" %}{% endwith %}
     <div class="columns" style="margin: 0 20px;">
         <div class="column is-one-quarter" style="overflow-y: scroll; height: 94vh; padding: 20px auto;">
             <div class="content">
@@ -64,10 +64,109 @@
             </div>
         </div>
         <div class="column">
-            <h1 class="title">{{data[0].get_name()}}</h1>
-            <h1>{{data[0].get_healthCardId()}}</h1>
+            <div class="level">
+                <div class="level-left">
+                    <p class="level-item  has-text-grey-lighter">
+                        Appointment ID: #{{12312419024}}
+                    </p>
+                </div>
+                <p class="level-item  has-text-centered	 has-text-grey-lighter">
+                    Time Created: 2018-02-18 5:00
+                </p>
+                <div class="level-right">
 
+                    <p class="level-item">
+                        <span class="tags has-addons">
+                            <span class="tag is-medium">ETA</span>
+                            <span class="tag is-warning is-medium" id="warningLevel">
+                                <i class="fas fa-exclamation-triangle"></i> 10min
+                            </span>
+                        </span>
+                    </p>
+                </div>
+            </div>
 
+            <section class="section">
+                <div class="container">
+
+                    <h1 class="title">{{data[0].get_name()}}</h1>
+                    <h2 class="subtitle">
+                        #{{data[0].get_healthCardId()}}
+                        <span style="margin-left: 20px" class="has-text-grey is-size-6">Expires: {{data[0].get_expiryDate()}}</span>
+                    </h2>
+                    <div class="level">
+                        <div class="level-item">
+                            <div class="field">
+                                <label class="label">Date of Birth</label>
+                                <div class="control">
+                                    <input class="input is-static" type="date" name="dateOfBirth" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="level-item">
+
+                            <div class="field">
+                                <label class="label">Sex</label>
+                                <div class="control">
+                                    <input class="input is-static" type="text" name="sex" value={{data[0].get_sex()}} readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="level-item">
+                            <div class="field">
+                                <label class="label">Phone Number</label>
+                                <div class="control">
+                                    <input class="input is-static" type="tel" name="phoneNumber" value={{data[0].get_phoneNumber()}} readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="level-item">
+                            <div class="field">
+                                <label class="label">Primary Address</label>
+                                <div class="control">
+                                    <input class="input is-static" type="text" name="primaryAddress" value={{data[0].get_primaryAddress()}} readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="level">
+                    <div class="level-left">
+                    </div>
+                    <div class="level-right">
+                        <div class="level-item">
+                            <span class="tags has-addons">
+                                <span class="tag is-medium">Emergency Level</span>
+                                <span class="tag is-warning is-medium" id="warningLevel">
+                                    <i class="fas fa-exclamation-triangle"></i> Warning
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Problem:</label>
+                    <textarea class="textarea is-static" name="shortDescription" value="FATTTTYAYASHDKJASHKJDHSAKJDHASK H ASJKHDJKASHDKJSAJH DAS DSADSA DKJASH"
+                        style="resize: none" readonly></textarea>
+                </div>
+                <div class="field">
+                    <label class="label">Other information:</label>
+                    <textarea class="textarea is-static" name="otherInfo" value={{data[0].get_health_condition()}} style="resize: none" readonly></textarea>
+                </div>
+                <div class="level">
+                    <div class="level-left">
+                    </div>
+                    <div class="level-right">
+                        <div class="level-item">
+                            <button class="button is-large">Call Specialist</button>
+                        </div>
+                        <div class="level-item">
+                            <button class="button is-primary is-large">Complete</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
 </body>
