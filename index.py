@@ -5,3 +5,15 @@ app = Flask(__name__)
 @app.route("/")
 def hello():
     return "Hello World!"
+
+@app.route("/dashboard")
+def dashboard():
+    return render_template("dashboard.html")
+
+@app.route("/phone")
+def phone():
+    return render_template("app.html", name="Zuraiz")
+
+@app.route("/user")
+def user():
+    return render_template("edituser.html", name="Zuraiz")
