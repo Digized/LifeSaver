@@ -1,5 +1,7 @@
 import requests
 import json
+from pymongo import *
+
 
 class Patient:
     def __init__(self, healthCardId,expiryDate, name, dateOfBirth, sex, phoneNumber, primaryAddress, healthCondition):
@@ -51,6 +53,35 @@ class Patient:
         self.primaryAddress=newAddress
     def set_healthCondition(self, newhealthCondition):
         self.healthCondition = newhealthCondition
+    
+    def toJSON(self):
+        val = {
+            "healthCardId": self.healthCardId,
+            "expiryDate":self.expiryDate,
+            "name":self.firstname,
+            "dateOfBirth":self.dateOfBirth,
+            "sex":self.sex,
+            "phoneNumber":self.phoneNumber,
+            "primaryAddress":self.primaryAddress,
+            "healthCondition":self.healthCondition        
+        }
+        return val
 
-a = Patient('123444444','232323','Dan Siddiqui','dob','sex','32323232','45mann','helth')
-print (a.get_current_location())
+    @staticmethod
+    def find_by_HC(healthCardNum):
+        client=MongoClient()
+        db=client.booking_object_database
+        collection=db.patients
+        result=collection.find({'healthCardId':healthCardNum})
+        print(result);
+    
+    @staticmethod
+    def create(patient):
+        client=MongoClient()
+        db=client.booking_object_database
+        collection=db.patients
+        result=collection.insert(patient.toJSON())
+        return patient.get_healthCardId();
+
+# a = Patient('123444444','232323','Dan Siddiqui','dob','sex','32323232','45mann','helth')
+# print (a.get_current_location())
