@@ -3,8 +3,6 @@ from Patient import Patient
 from BookingObject import BookingObject
 from flask import Flask, render_template, request, jsonify
 app = Flask(__name__)
-a = Patient('123444444','232323','Dan Siddiqui','dob','sex','32323232','45mann','helth')
-print(a)
 
 @app.route("/")
 def hello():
@@ -41,4 +39,5 @@ def create_patient():
 def createBooking():
     shortDescription = request.form['shortDescription']
     emergancylevel = request.form['level']
+    patient = request.form['Patient']
     booking = BookingObject(patient,shortDescription,emergencyLevel)
