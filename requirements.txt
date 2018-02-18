@@ -1,3 +1,2 @@
 Flask
 --upgrade google-cloud-vision
-pymongo

@@ -23,13 +23,14 @@ from BookingObject import BookingObject
 import operator
 #queue is implemented here for each hospital
 class Hospital:
-    def __init__(self, name, address):
+    def __init__(self, name, address,id):
         self.name = name
         self.address = address
         self.waitTime = 0
         self.numberofPatients = len(patientdict)
         self.busylevel = ""
         self.patientdict = []
+        self.id = id
 
     def add_Booking(BookingObject):
         patientdict.append(BookingObject)

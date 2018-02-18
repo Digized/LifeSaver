@@ -16,9 +16,9 @@ ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-hospital1 = Hospital("Ottawa Hostpital", "123 Hospital.Rd")
+hospital1 = Hospital("Ottawa Hostpital", "123 Hospital.Rd",ho1)
 
-hospital2 = hospital2("City Clinic,", "66 Town.st")
+hospital2 = hospital2("City Clinic,", "66 Town.st",ho2)
 
 listOfHospital = [hospital1, hospital2]
 def lbh(listOfHospital):
