@@ -1,3 +1,6 @@
+import requests
+import json
+
 class Patient:
     def __init__(self, healthCardId, firstName,lastName, dateOfBirth, sex, phoneNumber, primaryAddress, healthCondition):
         self.healthCardId=healthCardId
@@ -6,7 +9,7 @@ class Patient:
         self.dateOfBirth=dateOfBirth
         self.sex=sex
         self.phoneNumber=phoneNumber
-        self.address=address
+        self.primaryAddress=primaryAddress
         self.healthCondition=healthCondition
 
     def get_healthCardId(self):
@@ -24,7 +27,14 @@ class Patient:
     def get_primaryAddress(self):
         return self.primaryAddress
     def get_current_location(self):
-        return "gps coordinates"
+
+        send_url = 'http://freegeoip.net/json'
+        r = requests.get(send_url)
+        j = json.loads(r.text)
+        lat = j['latitude']
+        lon = j['longitude']
+        city = j['city']
+        return "latitude: "+str(lat)+ " longitude: "+ str(city)
 
     def set_firstName(self, newfirstname):
         self.firstName = newfirstname
@@ -42,3 +52,6 @@ class Patient:
         self.primaryAddress=newAddress
     def set_healthCondition(self, newhealthCondition):
         self.healthCondition = newhealthCondition
+
+a = Patient('123444444','Dan', 'siddiqui','dob','sex','32323232','45mann','helth')
+print (a.get_current_location())

@@ -27,4 +27,3 @@ class BookingObject:
         self.notes=notes
     def set_booking_state(self,state):
         self.bookingState=state
-    
