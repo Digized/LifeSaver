@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
-import Patient from Patient
-import BookingObject from BookingObject
+from Patient import Patient
+from BookingObject import BookingObject
 from flask import Flask, render_template, request, jsonify
 app = Flask(__name__)
+a = Patient('123444444','232323','Dan Siddiqui','dob','sex','32323232','45mann','helth')
+print(a)
 
 @app.route("/")
 def hello():
@@ -33,22 +35,10 @@ def create_patient():
 
 
     patientcreated = Patient(healthCardId, expiryDate, name, dateOfBirth, sex, phoneNumber, primaryAddress, healthCondition)
-    patientlist.add(patientcreated)
     return patientcreated
-patientlist []
-def create_Booking(patientcreated):
 
-
-
-# a = patient()
-# try:
-#     import Queue as Q  # ver. < 3.0
-# except ImportError:
-#     import queue as Q
-#
-# q = Q.PriorityQueue()
-# q.put((Booking.get_emergency_level(),Booking Obj))
-# q.put((1,'one'))
-# q.put((5,'five'))
-# while not q.empty():
-#     print q.get(),
+@app.route('/api/user/creatbooking', methods = ["POST"])
+def createBooking():
+    shortDescription = request.form['shortDescription']
+    emergancylevel = request.form['level']
+    booking = BookingObject(patient,shortDescription,emergencyLevel)
