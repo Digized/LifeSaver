@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello():
-    return render_template('index.html')
+    return "Hello World!"
 
 @app.route("/dashboard")
 def dashboard():
@@ -21,3 +21,20 @@ def user():
 @app.route("/uploadImage", methods="POST")
 def uploadImage():
     return "nothing for now";
+
+@app.route('/api/user',methods = ['POST'])
+def show_user_profile():
+    print ('hello')
+    return None
+# a = patient()
+# try:
+#     import Queue as Q  # ver. < 3.0
+# except ImportError:
+#     import queue as Q
+#
+# q = Q.PriorityQueue()
+# q.put((Booking.level(),Booking))
+# q.put((1,'one'))
+# q.put((5,'five'))
+# while not q.empty():
+#     print q.get(),
