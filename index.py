@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
 app = Flask(__name__)
 
 @app.route("/")
@@ -17,3 +17,7 @@ def phone():
 @app.route("/user")
 def user():
     return render_template("edituser.html", name="Zuraiz")
+
+@app.route("/uploadImage", methods="POST")
+def uploadImage():
+    return "nothing for now";
