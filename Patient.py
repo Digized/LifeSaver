@@ -5,7 +5,7 @@ class Patient:
     def __init__(self, healthCardId,expiryDate, name, dateOfBirth, sex, phoneNumber, primaryAddress, healthCondition):
         self.healthCardId=healthCardId
         self.expiryDate=expiryDate
-        self.firstname=name
+        self.name=name
         self.dateOfBirth=dateOfBirth
         self.sex=sex
         self.phoneNumber=phoneNumber
