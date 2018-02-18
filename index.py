@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from flask import Flask, render_template
+from flask import Flask, render_template, request, jsonify
 app = Flask(__name__)
 
 @app.route("/")
@@ -17,3 +17,20 @@ def phone():
 @app.route("/user")
 def user():
     return render_template("edituser.html", name="Zuraiz")
+
+@app.route('/api/user',methods = ['POST'])
+def show_user_profile():
+    print ('hello')
+    return None
+# a = patient()
+# try:
+#     import Queue as Q  # ver. < 3.0
+# except ImportError:
+#     import queue as Q
+#
+# q = Q.PriorityQueue()
+# q.put((Booking.level(),Booking))
+# q.put((1,'one'))
+# q.put((5,'five'))
+# while not q.empty():
+#     print q.get(),
