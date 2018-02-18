@@ -1,14 +1,23 @@
+import datetime
+import sqlite3
+from mongoengine import *
 class BookingObject:
     def __init__(self,patient,shortDescription,emergencyLevel):
         self.patient=patient
         self.shortDescription=shortDescription
-        self.queueNumber
+        self.queueNumber=''
         self.emergencyLevel=emergencyLevel
         self.patientLocation=patient.get_location()
         self.notes=""
         self.bookingState='waiting'
+        self.startTime=datetime.datetime.now();
+        connect('booking_object', host='localhost', port=27017)
+    def get_end_time(self):
+        return datetime.datetime.now()
     def get_patient(self):
         return self.patient
+    def get_start_time(self):
+        return self.startTime
     def get_short_description(self):
         return self.shortDescription
     def get_queue_number(self):
@@ -27,4 +36,4 @@ class BookingObject:
         self.notes=notes
     def set_booking_state(self,state):
         self.bookingState=state
-    
+class Post(Document):
