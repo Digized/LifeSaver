@@ -13,3 +13,7 @@ def dashboard():
 @app.route("/phone")
 def phone():
     return render_template("app.html", name="Zuraiz")
+
+@app.route("/user")
+def user():
+    return render_template("edituser.html", name="Zuraiz")
