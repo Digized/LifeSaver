@@ -37,6 +37,9 @@ class Patient:
         city = j['city']
         return "latitude: "+str(lat)+ " longitude: "+ str(lon)
 
+    def get_health_condition(self):
+        return self.healthCondition
+
     def set_name(self, newname):
         self.name = newname
     def set_healthCardId(self, newhealthCardId):

@@ -8,32 +8,6 @@ from werkzeug.utils import secure_filename
 from google.cloud import vision
 from google.cloud.vision import types
 
-# data = []
-# data.append(Patient('123444444','Dan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-# data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-# data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-# data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-# data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-# data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-#     data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-#     data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-#     data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-#     data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-#     data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-#     data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-#     data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-#     data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-#     data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-#     data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-#     data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-#     data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-#     data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-#     data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-#     data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-#     data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-#     data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-#     data.append(Patient('1234444asda44','Dasjdhasksan', 'siddiqui','dob','sex','32323232','45mann','helth'))
-# data.append(Patient('12344asdsa4444','Dasdbaskhan', 'siddiqui','dob','sex','32asdas323232','45mann','helth'))
 UPLOAD_FOLDER = os.path.dirname(__file__)+'/tmpfiles/'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
@@ -48,9 +22,12 @@ def allowed_file(filename):
 def hello():
     return "Hello World!"
 
-@app.route("/clinic/<id>/")
-def dashboard(id):
-    Patient.get
+@app.route("/clinic/")
+def deletdashboard():
+    return render_template("dashboard.html", data=data)
+
+@app.route("/clinic/<name>/")
+def dashboard(name):
     return render_template("dashboard.html", data=data)
 
 @app.route("/user/<id>")

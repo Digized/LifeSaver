@@ -41,7 +41,8 @@ class BookingObject:
         if(res==None):
             return -1
         return res['startTime']
-        @staticmethod
+    
+    @staticmethod
     def get_short_description(healthCardNum):
         client=MongoClient()
         db=client.booking_object_database
