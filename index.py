@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import os
 from Patient import Patient
+from BookingObject import BookingObject
 from io import open
 from flask import Flask, render_template, jsonify, request
 from werkzeug.utils import secure_filename
@@ -60,7 +61,7 @@ def phone():
 def user():
     return render_template("edituser.html", name="Zuraiz")
 
-@app.route('/upload', methods=['GET', 'POST'])
+  @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
         # check if the post request has the file part
@@ -89,6 +90,26 @@ def show_user_profile():
     print ('hello')
     return None
     
+@app.route('/api/user',methods = ["POST"])
+def create_patient():
+    name = request.form['name']
+    healthCardId = request.form['healthCardId']
+    dateOfBirth = request.form['dateOfBirth']
+    sex = request.form['sex']
+    expiryDate = request.form['expiryDate']
+    primaryAddress = request.form['primaryAddress']
+    phoneNumber = request.form['phoneNumber']
+    healthCondition = request.form['healthCondition']
+
+
+    patientcreated = Patient(healthCardId, expiryDate, name, dateOfBirth, sex, phoneNumber, primaryAddress, healthCondition)
+    patientlist.add(patientcreated)
+    return patientcreated
+patientlist []
+def create_Booking(patientcreated):
+
+
+
 # a = patient()
 # try:
 #     import Queue as Q  # ver. < 3.0
@@ -96,7 +117,7 @@ def show_user_profile():
 #     import queue as Q
 #
 # q = Q.PriorityQueue()
-# q.put((Booking.level(),Booking))
+# q.put((Booking.get_emergency_level(),Booking Obj))
 # q.put((1,'one'))
 # q.put((5,'five'))
 # while not q.empty():
