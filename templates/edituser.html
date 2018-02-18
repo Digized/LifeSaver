@@ -18,10 +18,71 @@
 <body>
     {% include "header.html" %}
     <div class="container is-fluid" style="margin: 50px">
+        <div class="level">
+            <div class="level-left">
+            </div>
+            <div class="level-right">
+                <div class="level-item">
+                    <div class="field">
+                        <div class="file">
+                            <label class="file-label">
+                                <input class="file-input" type="file" name="resume">
+                                <span class="file-cta">
+                                    <span class="file-icon">
+                                        <i class="fas fa-upload"></i>
+                                    </span>
+                                    <span class="file-label">
+                                        Upload Health Card...
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <form>
             <div class="field">
-                <label class="label">Describe Your Problem</label>
-                <textarea class="textarea" placeholder="Ex. I have a stomach ache. I ate a lot yesterday" style="resize: none"></textarea>
+                <label class="label">Name</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="Name">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Email</label>
+                <div class="control">
+                    <input class="input" type="email" placeholder="admin@3amcommit.com">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Password</label>
+                <div class="control">
+                    <input class="input" type="password">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Health Card ID</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="1234-827-012-DR">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Date of Birth</label>
+                <div class="control">
+                    <input class="input" type="date" placeholder="">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Sex</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Expiration Date</label>
+                <div class="control">
+                    <input class="input" type="date" placeholder="">
+                </div>
             </div>
             <div class="level">
                 <div class="level-left">
@@ -29,9 +90,9 @@
                 <div class="level-right">
                     <div class="level-item">
                         <div class="field is-grouped">
-                                <div class="control">
-                                        <input type="reset" class="button is-danger" />
-                                    </div>
+                            <div class="control">
+                                <input type="reset" class="button is-danger" />
+                            </div>
                             <div class="control">
                                 <input type="submit" class="button is-primary" title="Create Appointment" value="Create Appointment" />
                             </div>
