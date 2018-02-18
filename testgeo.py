@@ -10,6 +10,3 @@ lon = j['longitude']
 
 
 print(j)
-
-a = Patient('123444444','Dan', 'siddiqui','dob','sex','32323232','45mann','helth')
-print(a.get_lastName)

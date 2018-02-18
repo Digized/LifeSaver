@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-from flask import Flask, render_template, jsonify, request
+import Patient from Patient
+import BookingObject from BookingObject
+from flask import Flask, render_template, request, jsonify
 app = Flask(__name__)
 
 @app.route("/")
@@ -18,14 +20,26 @@ def phone():
 def user():
     return render_template("edituser.html", name="Zuraiz")
 
-@app.route("/uploadImage", methods="POST")
-def uploadImage():
-    return "nothing for now";
+@app.route('/api/user',methods = ["POST"])
+def create_patient():
+    name = request.form['name']
+    healthCardId = request.form['healthCardId']
+    dateOfBirth = request.form['dateOfBirth']
+    sex = request.form['sex']
+    expiryDate = request.form['expiryDate']
+    primaryAddress = request.form['primaryAddress']
+    phoneNumber = request.form['phoneNumber']
+    healthCondition = request.form['healthCondition']
 
-@app.route('/api/user',methods = ['POST'])
-def show_user_profile():
-    print ('hello')
-    return None
+
+    patientcreated = Patient(healthCardId, expiryDate, name, dateOfBirth, sex, phoneNumber, primaryAddress, healthCondition)
+    patientlist.add(patientcreated)
+    return patientcreated
+patientlist []
+def create_Booking(patientcreated):
+
+
+
 # a = patient()
 # try:
 #     import Queue as Q  # ver. < 3.0
@@ -33,7 +47,7 @@ def show_user_profile():
 #     import queue as Q
 #
 # q = Q.PriorityQueue()
-# q.put((Booking.level(),Booking))
+# q.put((Booking.get_emergency_level(),Booking Obj))
 # q.put((1,'one'))
 # q.put((5,'five'))
 # while not q.empty():

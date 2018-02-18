@@ -41,47 +41,53 @@
                 </div>
             </div>
         </div>
-        <form>
+        <form action="/api/user/" method="post">
             <div class="field">
                 <label class="label">Name</label>
                 <div class="control">
-                    <input class="input" type="text" placeholder="Name">
-                </div>
-            </div>
-            <div class="field">
-                <label class="label">Email</label>
-                <div class="control">
-                    <input class="input" type="email" placeholder="admin@3amcommit.com">
-                </div>
-            </div>
-            <div class="field">
-                <label class="label">Password</label>
-                <div class="control">
-                    <input class="input" type="password">
+                    <input class="input" type="text" name ="name" placeholder="Name">
                 </div>
             </div>
             <div class="field">
                 <label class="label">Health Card ID</label>
                 <div class="control">
-                    <input class="input" type="text" placeholder="1234-827-012-DR">
+                    <input class="input" type="text" name ="healthCardId" placeholder="1234-827-012-DR">
                 </div>
             </div>
             <div class="field">
                 <label class="label">Date of Birth</label>
                 <div class="control">
-                    <input class="input" type="date" placeholder="">
+                    <input class="input" type="date" name = "dateOfBirth" placeholder="">
                 </div>
             </div>
             <div class="field">
                 <label class="label">Sex</label>
                 <div class="control">
-                    <input class="input" type="text" placeholder="">
+                    <input class="input" type="text" name= "sex" placeholder="Male/Female">
                 </div>
             </div>
             <div class="field">
                 <label class="label">Expiration Date</label>
                 <div class="control">
-                    <input class="input" type="date" placeholder="">
+                    <input class="input" type="date" name = "expiryDate" placeholder="DD-MM-YYYY">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Phone Number</label>
+                <div class="control">
+                    <input class="input" type="text" name= "phoneNumber" placeholder="123-456-7890">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Primary Address</label>
+                <div class="control">
+                    <input class="input" type="text" name= "primaryAddress" placeholder="123 Road st, Mississauga ON">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Health Condition/Allergies</label>
+                <div class="control">
+                    <input class="input" type="text" name= "healthCondition" placeholder="Peanut Allergy,Advil" >
                 </div>
             </div>
             <div class="level">
